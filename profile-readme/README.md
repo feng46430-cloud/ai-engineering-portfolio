@@ -2,16 +2,16 @@
 
 # Feng Xu (徐峰)
 
-**AI Evaluation & Deterministic Harness Practitioner · Technical AI Workflow Architect · 6-Year Game/XR QA Lead**
+**AI Interactive Systems & Eval Practitioner · Multi-Agent Workflow Architect · 6-Year Game QA Lead**
 
 *Turning stochastic LLM capabilities into deterministic, verifiable, production-grade workflows.*  
-*用需求拆解、确定性护栏、控变量评测与质量门禁，把 AI 系统从 60 分 Demo 稳定交付到 95 分生产工具。*
+*用需求拆解、确定性护栏、控变量评测与质量门禁，把 AI 交互与多 Agent 系统从 60 分 Demo 稳定交付到 95 分生产工具。*
 
 <p>
-  <img src="https://img.shields.io/badge/Focus-AI%20Eval%20%26%20Guardrails-1d4ed8?style=flat-square" alt="AI Eval" />
+  <img src="https://img.shields.io/badge/Focus-AI%20Interactive%20Systems%20%26%20Eval-1d4ed8?style=flat-square" alt="AI Interactive Systems & Eval" />
   <img src="https://img.shields.io/badge/Architecture-Multi--Agent%20Orchestration-0f172a?style=flat-square" alt="Multi-Agent" />
   <img src="https://img.shields.io/badge/Methodology-Spec--Driven%20%26%20Deterministic%20Harness-334155?style=flat-square" alt="Spec-Driven" />
-  <img src="https://img.shields.io/badge/Domain-Game%20%26%20XR%20Systems%20QA%20(6%20Yrs)-475569?style=flat-square" alt="Systems QA" />
+  <img src="https://img.shields.io/badge/Domain-Game%20Systems%20%26%20QA%20Lead%20(6%20Yrs)-475569?style=flat-square" alt="Game Systems QA" />
   <img src="https://img.shields.io/badge/Base-Shanghai%20%7C%20Remote-0369a1?style=flat-square" alt="Location" />
 </p>
 
@@ -63,10 +63,10 @@
 | **AI Agent & Context Engineering** | Multi-Agent DAG Orchestration · Hybrid RAG (`Exact + Vector + Rerank`) · Context Compression & U-Curve Attention Audit · MCP · Anthropic & OpenAI API Protocol Debugging · Local SearXNG |
 | **AI Evaluation & Guardrails** | 5-Gate Doc×Code Anti-Hallucination SOP · Dynamic State-Machine Simulation · Anti-Goodhart Bidirectional Critic · Lexical/Regex Guardrails · Dual-Agent Independent Code Review |
 | **Spec-Driven Delivery & Tooling** | Technical PRD & Architecture Spec (ADR) · Spec-Driven AI-Assisted Tooling (Python / Node.js / Electron / CDP) · `node --test` Automated Regression · RFC-4180 / SHA-256 Validation |
-| **Game, XR & Systems QA (6 Yrs)** | Unreal Engine / Unity Profiling (`Unity Profile Analyzer` / `PerfDog`) · VR & Mocap Hardware Latency Benchmarking · Release Branch Governance · Cross-Timezone English Collaboration |
+| **Game & Complex Systems QA (6 Yrs)** | Unreal Engine / Unity Profiling (`Unity Profile Analyzer` / `PerfDog`) · End-to-End Systems Latency Benchmarking · Release Branch Governance · Cross-Timezone English Collaboration |
 
 ---
 
 <div align="center">
-  <sub>Open to opportunities in <b>AI Evaluation (AI Eval)</b> · <b>Technical AI PM</b> · <b>AI Workflow & Efficiency Engineering</b> · <b>AI-Native QA Architecture</b></sub>
+  <sub>Open to opportunities in <b>AI Interactive Systems & Narrative</b> · <b>AI Evaluation (AI Eval)</b> · <b>Technical AI PM</b> · <b>AI Workflow & QA Architecture</b></sub>
 </div>
