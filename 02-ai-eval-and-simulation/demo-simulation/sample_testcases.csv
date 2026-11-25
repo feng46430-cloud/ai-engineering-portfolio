@@ -1,0 +1,8 @@
+﻿用例ID,所属模块,测试维度,用例标题,现网去哪测（前置）,操作步骤,预期结果,测试场站点映射,排查参考（提单定责用）
+TC-COMBAT-001,战斗交互,核心主路径,格挡状态下受轻击触发弹反并返还耐力,进入测试场战斗区，角色满耐力并装备近战武器,"1. 在敌方前摇窗口按下格挡键
+2. 观察受击反馈与耐力条变化",角色触发弹反硬直反制，耐力返还且无额外扣血,TP_QA_Combat | QA_Combat_Parry,RPC_CombatParry / CVar combat.parryWindowMs / LogTag:[CombatParry]
+TC-COMBAT-002,战斗交互,异常与打断,弱网断线重连后状态机不残留永久霸体标记,在测试场触发霸体技能后立即模拟断网 5 秒并恢复,"1. 释放带霸体前摇的技能
+2. 断网 5 秒后重连
+3. 让普通怪物攻击角色",重连后霸体状态正确过期，受击正常产生硬直，无状态残留,TP_QA_Combat | QA_Combat_StateSync,StateFlag.SuperArmor / ReconcileTick / LogTag:[NetStateSync]
+TC-INV-003,背包与持久化,边界与数值,堆叠上限 999 时再拾取 1 个物品自动拆格且不丢件,角色背包第 1 格持有 999 个可堆叠消耗品，第 2 格为空,"1. 拾取同 ID 消耗品 1 个
+2. 退出重登后检查背包",第 1 格保持 999，第 2 格新增 1 个；重登后数量一致,TP_QA_Inventory | QA_Inv_StackCap,Cfg.MaxStack=999 / SaveChunk.Inventory / LogTag:[InvPersist]
