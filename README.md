@@ -1,47 +1,54 @@
-# AI Engineering, Evaluation & Deterministic Harness Portfolio
+# AI Interactive Systems, Evaluation & Deterministic Harness Portfolio
 
-> **定位**：6 年一线游戏 QA & 0→1 QA Lead 背景的 **AI 交互系统与评测实践者（AI Interactive Systems & Eval）/ 技术向 AI 产品与工作流架构师 / AI-Native 质量效能负责人**。  
-> **核心理念**：不靠“玄学调 Prompt”，而是通过 **「需求拆解 → 确定性机制约束（让模型读而非算）→ 源码对齐与仿真压测 → 独立交叉验收」**，把不稳定的大模型能力工程化地稳定交付到真实 AI 交互与生产工作流。
+> **定位**：6 年一线游戏 QA & 0→1 QA Lead 背景的 **AI 交互叙事与世界模拟设计者 / AI 评测（Eval）实践者 / 技术向 AI 产品与工作流设计者**。  
+> **分工与边界说明**：本仓库中的所有自动化脚本与工具原型均由 **本人主导问题定义、规则与架构设计、异常边界约束及实机验收，协同 AI Coding 工具落地实现**。仓库保持单层清爽结构，不堆重复文案；每一项结论都直接挂钩可阅读原件、真实实测数据或可运行脚本。
 
 ---
 
-## 30 秒看懂这份作品集（核心实证一览）
+## 一、按目标岗位直接看哪块（零重复导航）
 
-| 模块 | 代表项目 / 体系 | 关键架构与量化实证 | 对应目标岗位能力 |
+| 你正在招的岗位方向 | 优先看这 2 个目录 | 核心真证据 |
+| :--- | :--- | :--- |
+| **智能 NPC / AI 玩法策划 / AI 互动叙事** | **[05 · 叙事预设原件与 201 楼消融](./05-rp-narrative-and-ablation/)** · **[01 · 多 Agent 编排](./01-multi-agent-orchestrator/)** | 现役重构预设纯文本原件（`-78.2%`）· 约 3 万楼/3 题材实证 · 6 份 ADR · 废弃画布改列表复盘 |
+| **AI 内容策略 PM / 大模型评测（AI Eval）** | **[05 · 201 楼 3-Way 公平消融](./05-rp-narrative-and-ablation/)** · **[02 · AI 评测与仿真](./02-ai-eval-and-simulation/)** | N=3 多场景实测 Prompt **`-88.7%`**（CoT 遵循 `0/3→3/3`、按需召回不误杀）· 500 轮仿真脚本 · 1,177 全库复审 |
+| **AI 应用 PM / 工作流与 UGC 工具产品** | **[01 · 多 Agent 编排工作台](./01-multi-agent-orchestrator/)** · **[03 · 确定性护栏治理](./03-deterministic-guardrails/)** | V1→V4 归零重构（-79%）· 有序步骤列表 + 单/多 Agent 无损切换 · 2 份商业工具 PRD 原件 |
+| **AI-Native 测开 / 游戏测试经理 / QA 效能** | **[02 · 5-Gate 防幻觉 QA](./02-ai-eval-and-simulation/)** · **[04 · 系统评测与治理](./04-systems-benchmark-and-governance/)** | Unreal MCP 测试场（`70%→98.6%`）· Gate 5 校验脚本 · 飞书免登录 23 页延迟方案 & 16 页横评原件 |
+
+---
+
+## 二、五大模块 STAR 一览
+
+| 模块 | S / T（解决的真问题） | A（本人主导的关键动作） | R（可验证结果） |
 | :--- | :--- | :--- | :--- |
-| **[01 · 多 Agent 编排引擎](./01-multi-agent-orchestrator/)** | 配置驱动型多 Agent 编排与审校工作台（V1 → V2~V4 `v4.16.1`） | • **V1 (23,908 行 / 867 单测 / 52 路由) → 复盘归零重构 V2~V4 (5,290 行 / 284 单测)，代码瘦身 79%**<br>• **6 份正式 ADR** + 3 条架构铁律 + 混合 RAG（精确命中 → 向量粗筛 → 精排 Rerank）<br>• 产品决策：实测废弃低效节点画布，改用有序步骤列表 + 单/内部多 Agent 无损切换 | AI Agent 架构<br>技术向 AI PM<br>AI 工作流工程 |
-| **[02 · AI 评测与仿真体系](./02-ai-eval-and-simulation/)** | 5-Gate 文档×源码防幻觉审计 SOP + 500 轮动态仿真压测 & Token 经济学 | • **5-Gate 源码交叉核验管线**：分离现网可测 / 未实现预留 / 跨文档冲突 + RFC-4180 校验<br>• **500 轮数值/状态机仿真**：上线前拦截 **11 项系统缺陷**（冷启动死锁、衰减误差、竞态）<br>• **含可一键运行 Python Demo**：`python 02-ai-eval-and-simulation/demo-simulation/run_sim.py` | AI Eval 评测工程<br>AI-Native 测开<br>质量架构设计 |
-| **[03 · 确定性护栏武器库](./03-deterministic-guardrails/)** | Deterministic Harness 护栏模式集 + 双 Agent 交叉复审 + 13 维红队评审 | • **4 大确定性护栏**：真随机防 LLM 挑数 / 嵌套语法词法检测修复 / 两级记忆压缩 / 换轴判据<br>• **Builder × 独立只读 Reviewer 双 Agent 四轮复审门禁**（拦截异步竞态、死卡独立回滚）<br>• **大型遗留前端改造复盘**：1.7 万行单文件审计 + 5 管线合一 + 资源省 54% + **36 套单测全绿** | Agent 稳定性与安全<br>AI 工程治理<br>自动化质量门禁 |
-| **[04 · 软硬件系统评测与治理](./04-systems-benchmark-and-governance/)** | VR 动捕全链路控变量 Benchmark + 研发分支治理 + 真实排障集 | • **4 段端到端延迟拆解** + 定位第三方 Unity SDK **UDP 协议初始化 Bug**<br>• **3 架构 6 设备 7 维横评** + 强磁 5 分钟累积误差压测 → 拍板核心 5 节点穿戴式方案<br>• **9 周分支合并与验收流重构** + 656 条四域用例体系 + 2 份内部工具 PRD | 控变量实验设计<br>底层根因排障<br>研发效能与流程治理 |
+| **[01 · 多 Agent 编排与审校工作台](./01-multi-agent-orchestrator/)** | 单轮长 Prompt 注意力稀释、自审失效、V1 过度耦合难维护 | 主导归零重构并沉淀 **6 份 ADR**；确立引擎领域无关 + 白名单隔离 + 独立判官打回；实测砍掉低效连线画布改有序列表 | 整体复杂度压减 **~79%**，单测秒级全绿，持续迭代发版至 `v4.16.1` |
+| **[02 · AI 评测、防幻觉 QA 与动态仿真](./02-ai-eval-and-simulation/)** | AI 照着过期文档编造假用例；长周期多变量规则上线后易死锁失衡 | 叫停 1,162 条 AI 用例并建立 **5-Gate 文档×源码核验 SOP** 与 1,177 条独立读回复审；设计 **500 轮数值仿真**与 CI 三维归因 | 商业项目拦截 **400+** 需求缺口，测试场覆盖率 **70.0% → 98.6%**（P0 **100%**）；仿真上线前拦截 **11** 项缺陷 |
+| **[03 · 确定性护栏与质量治理体系](./03-deterministic-guardrails/)** | 模型不擅长公平随机与格式闭合；黑名单禁令越堆越失效 | 确立「让模型读而非算」，落地真随机防作弊、嵌套语法修复、两级偏好压缩、换轴判据与双 Agent 交叉复审 | 862 字散乱补丁精简为 3 条公理；开源二次开发 **5 管线合一**、图片压 **54%**、**36** 套单测全绿 |
+| **[04 · 软硬件系统评测与研发治理](./04-systems-benchmark-and-governance/)** | 国际 VR 虚拟赛事需量化多段体感延迟、选定动捕方案并根治分支返工 | 独立完成 **4 段延迟拆解**与 6 设备强磁压测；定位第三方动捕 SDK 协议故障；重构 9 周分支验收流与 2 份工具 PRD | 拍板**核心 5 节点穿戴方案**；冒烟耗时由 **3 人 20–30 分钟压至单人 5–10 分钟**；沉淀 656 条用例与公开 PDF 原件 |
+| **[05 · 长程叙事预设原件与 201 楼公平消融](./05-rp-narrative-and-ablation/)** | 长程互动上下文动辄 13 万 Token 烧钱且丢指令，缺多场景公平实测 | 彻底重写现役叙事预设（`55,890→12,170` 字）；在 201 楼真实原卡覆盖 3 类场景（含点名旧曲召回边界）做 3-Way 公平消融 | N=3 均值 Prompt **`-88.7%`**（总量 **`-88.0%`**）、CoT 遵循 **`0/3→3/3`**、点名旧曲精准召回不误杀；附脱敏规则原件 |
 
 ---
 
-## 我的工作方式（为什么能把 AI 从 60 分稳定做到 95 分）
+## 三、自研工作台实机运行界面一览（已脱敏）
 
-1. **Spec 驱动与架构优先（先定机制与判据，绝不盲改）**  
-   先拆清需求边界、数据契约、状态机与失败路径，再以规格驱动（Spec-Driven）协同 AI Coding 工具高效实现；拒绝“打地鼠式叠补丁”，所有规则回归单一真源（Single Source of Truth）。
-2. **控制面与上下文面分离（让模型读而非算）**  
-   确定性代码管状态、随机源、格式契约、权限隔离和机械校验；LLM 只做其擅长的推理与生成，并通过**双向漂移审稿（防过度附和 / 防过度敌意）**替代易诱发 Goodhart 效应的死板配额。
-3. **零成本门禁优先 + 端到端强证据验收**  
-   凡可离线验证的只读检查、静态解析、单测、假模型稳定性压测与 400/404 异常路径必须先跑全绿，严控 Token 成本；不轻信模型自称“已完成”，通过独立只读 Agent 复审与真实环境验证闭环。
+> 以下均为本人自研工作台在真实长程存档上的**实机运行截屏**（仅对接口地址、模型别名与第三方条目名做最小化脱敏，零拼接假图）。
 
----
+| 全局 U 型注意力透视与实时 X 光（本轮折叠 31 项 / 省 6,899 字） | 世界书扫描护目镜（自动识别 41 个标签 / 实机拦截误触明细） |
+| :---: | :---: |
+| ![全局 U 型注意力分布与实时 X 光](./assets/ui-xray-ucurve.png) | ![世界书扫描护目镜与拦截明细](./assets/ui-worldbook-goggles.png) |
 
-## 快速体验可运行 Demo（零外部依赖，Python 3 直接跑）
-
-```bash
-# 1. 运行 500 轮状态机与非线性增长仿真对比（演示如何上线前拦出冷启动死锁与衰减误差）
-python 02-ai-eval-and-simulation/demo-simulation/run_sim.py
-
-# 2. 运行 RFC-4180 CSV + UTF-8 BOM + 防重ID/空字段确定性门禁校验器
-python 02-ai-eval-and-simulation/demo-simulation/validate_csv.py
-```
+> 更多高清实机截屏（有序步骤 CoT 拖拽编排与自动结构化执行流、独立 API 隔音室防从众辩论、副 AI 审校判官与 `see` 最小视野白名单、22 位真实大师剧组与范文仿写库）分别嵌在 **[01](./01-multi-agent-orchestrator/)** 与 **[05](./05-rp-narrative-and-ablation/)** 模块中。
 
 ---
 
-## 扩展阅读与公开原件
+## 四、可直接检验的原件与脚本索引
 
-- **公开扩展源码**：[feng46430-cloud/chat-autobackup](https://github.com/feng46430-cloud/chat-autobackup)（通读宿主渲染源码根治隐藏楼层索引偏移 Bug）
-- **完整硬件评测 / 工具 PRD / 流程治理 PDF 原件**：[飞书公开作品集《测试文档》](https://jcn3qpi51ul0.feishu.cn/drive/folder/Lj6cfpcyzluJ6Bd5zq1cfjw0nTd)（免登录可读）
+| 类型 | 入口链接 | 说明 |
+| :--- | :--- | :--- |
+| **自研叙事与世界模拟原件** | [`narrative-preset-core-modules.md`](./05-rp-narrative-and-ablation/narrative-preset-core-modules.md) · [`world-simulation-rules.md`](./05-rp-narrative-and-ablation/world-simulation-rules.md) | 现役重构预设纯文本原件（`-78.2%`）+ 六档三支柱晋升/确定性锚点成绩引擎/多水流世界视野原件 |
+| **201 楼真实消融实采** | [`05-rp-narrative-and-ablation/real-ablation-results.json`](./05-rp-narrative-and-ablation/real-ablation-results.json) · [`run_live_st.mjs`](./05-rp-narrative-and-ablation/run_live_st.mjs) | 脱敏实采 JSON 与本地 ST 公平实测脚本（含 3-Way 消融、4 轮隐式降温与 `A∩B→C→D` 原文） |
+| **可运行 500 轮仿真** | [`02-ai-eval-and-simulation/demo-simulation/run_sim.py`](./02-ai-eval-and-simulation/demo-simulation/run_sim.py) | 零依赖 Python 3 脚本：复现冷启动死锁/年流失 39% vs 校准收敛 |
+| **可运行 Gate 5 校验器** | [`02-ai-eval-and-simulation/demo-simulation/validate_csv.py`](./02-ai-eval-and-simulation/demo-simulation/validate_csv.py) · [`sample_testcases.csv`](./02-ai-eval-and-simulation/demo-simulation/sample_testcases.csv) | 零依赖 Python 3 脚本：双层用例样表 + 编码/防重/乱码确定性门禁 |
+| **架构与评审规范** | [`adr-highlights.md`](./01-multi-agent-orchestrator/adr-highlights.md) · [`patterns.md`](./01-multi-agent-orchestrator/patterns.md) · [`token-economics-audit.md`](./02-ai-eval-and-simulation/token-economics-audit.md) · [`dual-agent-review-sop.md`](./03-deterministic-guardrails/dual-agent-review-sop.md) · [`13-dim-redteam-rubric.md`](./03-deterministic-guardrails/13-dim-redteam-rubric.md) · [`engineering-postmortems.md`](./04-systems-benchmark-and-governance/engineering-postmortems.md) | 脱敏 ADR 精选、权限三问法、U 型注意力审计、双 Agent 复审 SOP、红队记分与 5 大根因排障 |
+| **外部公开源码与原件** | [chat-autobackup（GitHub）](https://github.com/feng46430-cloud/chat-autobackup) · [飞书公开评测文档原件](https://jcn3qpi51ul0.feishu.cn/drive/folder/Lj6cfpcyzluJ6Bd5zq1cfjw0nTd) | 独立排障发布的浏览器扩展源码 + 免登录直阅 23 页硬件延迟方案、16 页 6 设备横评、9 周分支图与 2 份工具 PRD |
 
-> **边界与声明**：本仓库所有工程复盘、ADR、数据与 Demo 均已彻底脱敏，不含任何公司专有代码、商业机密、密钥或第三方受版权保护源码；其中涉及第三方开源项目二次开发的案例，均已明确标注“基于开源二次开发”且仅展示本人主导的架构分析与测试工程数据。
+> **边界与声明**：本仓库所有案例、数据与脚本均已彻底脱敏，不含任何公司专有代码、商业机密、密钥或第三方受版权保护素材；涉及第三方开源项目二次开发的案例均已明确标注来源。
