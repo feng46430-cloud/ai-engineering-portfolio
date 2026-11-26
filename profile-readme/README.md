@@ -45,9 +45,6 @@
 #### 2. [`chat-autobackup`](https://github.com/feng46430-cloud/chat-autobackup) — *源码级根因修复的独立扩展*
 > 核查宿主渲染逻辑根治隐藏楼层计数偏移 Bug，实现分卡/分会话独立计数与自动备份。
 
-#### 3. [Public Engineering & Hardware Eval PDFs（飞书免登录原件）](https://jcn3qpi51ul0.feishu.cn/drive/folder/Lj6cfpcyzluJ6Bd5zq1cfjw0nTd)
-> 收录 23 页全链路硬件延迟测试方案、16 页 6 设备横评总结、9 周研发分支治理图、2 份内部测试工具 PRD 与游戏系统策划文档。
-
 ---
 
 ### Operating Principles（工作信条）
