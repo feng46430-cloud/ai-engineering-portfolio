@@ -40,7 +40,7 @@
 - [**02 · AI Eval & Simulation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/02-ai-eval-and-simulation) — 5-Gate 文档×源码防幻觉 SOP、商业脱敏实证与 **可运行 500 轮仿真 / CSV 门禁 Python 脚本**
 - [**03 · Deterministic Guardrails**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/03-deterministic-guardrails) — “让模型读而非算”护栏体系、开源二次开发收敛复盘与双 Agent 复审 / 13 维红队框架
 - [**04 · Systems Benchmark & Governance**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/04-systems-benchmark-and-governance) — VR 动捕 4 段延迟拆解、6 设备横评、9 周分支发布治理与 5 大根因排障实录
-- [**05 · RP Narrative Preset & 201-Turn Fair Ablation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/05-rp-narrative-and-ablation) — 自研重构叙事预设纯文本原件（`55,890→12,170` 字 `-78.2%`）+ 201 楼真实原卡 `N=3` 多场景 3-Way 公平消融（均值 Prompt Token `-88.7%`、CoT 遵循 `0/3→3/3`、点名旧曲精准召回不误杀）
+- [**05 · RP Narrative Preset & 201-Turn Fair Ablation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/05-rp-narrative-and-ablation) — 叙事预设重构核心模块（基于社区预设深度重构，仅公开本人重写部分，`55,890→12,170` 字 `-78.2%`）+ 201 条消息真实存档 `N=3` 多场景 3-Way 公平消融（均值 Prompt Token `-88.7%`、CoT 遵循 `0/3→3/3`、点名旧曲精准召回不误杀）
 
 #### 2. [`chat-autobackup`](https://github.com/feng46430-cloud/chat-autobackup) — *源码级根因修复的独立扩展*
 > 核查宿主渲染逻辑根治隐藏楼层计数偏移 Bug，实现分卡/分会话独立计数与自动备份。

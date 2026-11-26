@@ -44,7 +44,7 @@
 
 | 类型 | 入口链接 | 说明 |
 | :--- | :--- | :--- |
-| **自研叙事与世界模拟原件** | [`narrative-preset-core-modules.md`](./05-rp-narrative-and-ablation/narrative-preset-core-modules.md) · [`world-simulation-rules.md`](./05-rp-narrative-and-ablation/world-simulation-rules.md) | 现役重构预设纯文本原件（`-78.2%`）+ 六档三支柱晋升/确定性锚点成绩引擎/多水流世界视野原件 |
+| **叙事预设重构与世界模拟原件** | [`narrative-preset-core-modules.md`](./05-rp-narrative-and-ablation/narrative-preset-core-modules.md) · [`world-simulation-rules.md`](./05-rp-narrative-and-ablation/world-simulation-rules.md) | 现役重构预设纯文本原件（`-78.2%`）+ 六档三支柱晋升/确定性锚点成绩引擎/多水流世界视野原件 |
 | **201 楼真实消融实采** | [`05-rp-narrative-and-ablation/real-ablation-results.json`](./05-rp-narrative-and-ablation/real-ablation-results.json) · [`run_live_st.mjs`](./05-rp-narrative-and-ablation/run_live_st.mjs) | 脱敏实采 JSON 与本地 ST 公平实测脚本（含 3-Way 消融、4 轮隐式降温与 `A∩B→C→D` 原文） |
 | **可运行 500 轮仿真** | [`02-ai-eval-and-simulation/demo-simulation/run_sim.py`](./02-ai-eval-and-simulation/demo-simulation/run_sim.py) | 零依赖 Python 3 脚本：复现冷启动死锁/年流失 39% vs 校准收敛 |
 | **可运行 Gate 5 校验器** | [`02-ai-eval-and-simulation/demo-simulation/validate_csv.py`](./02-ai-eval-and-simulation/demo-simulation/validate_csv.py) · [`sample_testcases.csv`](./02-ai-eval-and-simulation/demo-simulation/sample_testcases.csv) | 零依赖 Python 3 脚本：双层用例样表 + 编码/防重/乱码确定性门禁 |
