@@ -35,7 +35,7 @@
 
 ### Featured Portfolio（精选公开作品 — 单层清爽导航，直达真实原件与脚本）
 
-#### 1. [`ai-engineering-portfolio`](https://github.com/feng46430-cloud/ai-engineering-portfolio) — *5 大 STAR 实证模块 + 真实预设原件与可运行脚本*
+#### 1. [`ai-engineering-portfolio`](https://github.com/feng46430-cloud/ai-engineering-portfolio) — *5 大 STAR 实证模块 + 架构 Spec 蓝图、脱敏实采数据与可运行脚本*
 - [**01 · Multi-Agent Orchestrator**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/01-multi-agent-orchestrator) — V1→V4 归零重构复盘、6 份 ADR、三问归属法与废弃画布改有序列表的产品决策
 - [**02 · AI Eval & Simulation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/02-ai-eval-and-simulation) — 5-Gate 文档×源码防幻觉通用框架（Clean-Room）与 **可运行 `1,860` 周多策略仿真 / `5,000` 盒卡池校验 / CSV 门禁 Python 脚本**
 - [**03 · Deterministic Guardrails**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/03-deterministic-guardrails) — “让模型读而非算”护栏体系、开源二次开发收敛复盘与双 Agent 复审 / 13 维红队框架
