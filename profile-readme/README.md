@@ -37,7 +37,7 @@
 
 #### 1. [`ai-engineering-portfolio`](https://github.com/feng46430-cloud/ai-engineering-portfolio) — *5 大 STAR 实证模块 + 真实预设原件与可运行脚本*
 - [**01 · Multi-Agent Orchestrator**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/01-multi-agent-orchestrator) — V1→V4 归零重构复盘、6 份 ADR、三问归属法与废弃画布改有序列表的产品决策
-- [**02 · AI Eval & Simulation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/02-ai-eval-and-simulation) — 5-Gate 文档×源码防幻觉通用框架（Clean-Room）与 **可运行 500 轮仿真 / CSV 门禁 Python 脚本**
+- [**02 · AI Eval & Simulation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/02-ai-eval-and-simulation) — 5-Gate 文档×源码防幻觉通用框架（Clean-Room）与 **可运行 `1,860` 周多策略仿真 / `5,000` 盒卡池校验 / CSV 门禁 Python 脚本**
 - [**03 · Deterministic Guardrails**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/03-deterministic-guardrails) — “让模型读而非算”护栏体系、开源二次开发收敛复盘与双 Agent 复审 / 13 维红队框架
 - [**04 · Systems Benchmark & Governance**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/04-systems-benchmark-and-governance) — 4 段体感延迟拆解通用方法论（Clean-Room）、研发分支治理范式与 5 大根因排障实录
 - [**05 · RP Narrative Spec, Reroll Evidence & 201-Turn Ablation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/05-rp-narrative-and-ablation) — Spec 架构蓝图（不暴露可直接照抄的成品提示词源码）+ 真实存档废弃重 Roll vs 定稿对照 + 201 条消息真实存档 3 场景 3-Way 公平消融（Prompt `~13.3 万 → ~1.5 万` Token、思考指令全按规执行且点名旧曲精准召回）

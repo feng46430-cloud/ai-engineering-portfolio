@@ -6,7 +6,7 @@ Demonstrates production-grade deterministic probability governance for commercia
   1. Five-layer domain model: Brand -> Line -> Product -> Box (12 Packs x 5 Slots) -> Checklist
   2. mulberry32 bitwise deterministic 32-bit PRNG for 100% reproducible QA seed replay
   3. Box-level guaranteed hit (Pity) + Fisher-Yates pack shuffle (eliminates tail-pack searching exploit!)
-  4. Base-rate expectation compensation (prevents +37% economy inflation when box guarantee is active!)
+  4. Base-rate expectation compensation (prevents +28.7% economy inflation at 1.10 target / +36.8% at 1.00 target!)
   5. Global 1/1 (One-of-One) & numbered serial inventory depletion lock (zero over-issue)
 
 Zero third-party dependencies (Python 3.9+ standard library only). Run directly with:
