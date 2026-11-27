@@ -102,7 +102,7 @@ function afterMarkdownHook(mes) {
 | :--- | :--- |
 | **[双 Agent 交叉复审工作流（Builder × Read-Only Reviewer）](./dual-agent-review-sop.md)** | 禁止“自己写、自己测、自己宣布通过”的独立只读复审 SOP（曾拦截异步竞态与异常卡死回滚缺陷） |
 | **[13 维红队系统/代码评审记分框架](./13-dim-redteam-rubric.md)** | 通用脱敏版红队评审打分标准，用于上线前结构化排雷 |
-| **双机防冲突同步与交接规范（`agy-sync`）** | 个人项目与工具配置的增量防冲突双向同步方案，内置工作区与敏感凭据硬隔离及 `HANDOFF.md` 接力规范 |
+| **[生产级渐进式披露 Agent Skills 与按需 MCP 准入治理](./agent-skills-and-mcp-governance.md)** | 消化 160+ 篇技术文档封装的 7 套生产级 Skills 路由范式、`mcp-on-demand` 四级安全准入决策树与 `agy-sync` 代码级数据边界硬阻断切片 |
 
 ---
 

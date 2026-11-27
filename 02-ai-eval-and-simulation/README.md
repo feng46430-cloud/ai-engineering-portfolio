@@ -31,9 +31,9 @@
    - **Gate 3（写前 4 维覆盖审计）**：强制展开状态互斥组合矩阵、边界异常与持久化场景，并绑定可执行验证锚点。
    - **Gate 4（前台白话 × 后台灰盒分离）**：执行步骤列零代码术语确保新人秒上手；排查辅助列内嵌定位锚点，提单即可直达定责。
    - **Gate 5（测试沙盒反向映射 + 单源双输出）**：由用例反推测试沙盒摆桩规格，脚本同源导出评审稿与导入表并通过格式/防重/乱码确定性门禁（见下方完全虚构的示例脚本 `validate_csv.py`）。
-2. **闭环测试沙盒与 CI 三维归因思路**
-   - 由核心用例反推隔离验收沙盒做闭环回归，避免在大地图/复杂环境中低效跑测；
-   - 将配置/导出异常从根源拆为「人工漏操作 / 代码缺陷 / 工具缺防呆」三类归因，避免仅按最后提交人误追责。
+2. **闭环测试沙盒、引擎协议联动冒烟与 CI 三维归因思路**
+   - 由核心用例反推隔离验收沙盒做闭环回归，避免在大地图/复杂环境中低效跑测；进一步打通 **「引擎 MCP 实机操控 + 服务端调试接口动态改参/跑后毫秒级自动回滚 + 坐标位移阈值断言 + 新增未知 Error 日志门禁 + 失败现场截图留证」** 的分钟级端到端自动化回归范式；
+   - 将多仓配置/导出异常（含父类资产级联改动、孤儿配置与锁阻塞）从根源拆为「人工漏操作 / 代码缺陷 / 工具缺防呆」三类归因并去重催办，避免仅按最后提交人误追责。
 
 ### R · 通用工程价值
 - 阻断过期废案与未落地规划混入测试集，显著降低 AI 用例的断言幻觉与漏先决风险；
@@ -77,6 +77,7 @@ flowchart LR
 | 类型 | 脚本 / 文档路径 | 用途与运行方式 |
 | :--- | :--- | :--- |
 | **500 轮动态仿真 Demo** | [`./demo-simulation/run_sim.py`](./demo-simulation/run_sim.py) | 复现“原参数冷启动死锁/过量衰减 vs. 校准后非线性模型”的 500 轮对比报告：<br>`python 02-ai-eval-and-simulation/demo-simulation/run_sim.py` |
+| **五层卡池保底与 1/1 防超发仿真** | [`./demo-simulation/run_gacha_box_sim.py`](./demo-simulation/run_gacha_box_sim.py) | 复现 5,000 盒抽卡/拆盒模拟：对比朴素独立随机（约 38% 空盒 + 全局 1/1 超发）vs. 整盒保底槽 + 全局序列号耗尽锁 + `mulberry32` 种子复现：<br>`python 02-ai-eval-and-simulation/demo-simulation/run_gacha_box_sim.py` |
 | **Gate 5 表格门禁校验器** | [`./demo-simulation/validate_csv.py`](./demo-simulation/validate_csv.py) | 检查导出表编码、行列齐整、重复 ID、必填空值与非法乱码字符（示例数据 [`sample_testcases.csv`](./demo-simulation/sample_testcases.csv)）：<br>`python 02-ai-eval-and-simulation/demo-simulation/validate_csv.py` |
 | **上下文与 Token 审计** | [`./token-economics-audit.md`](./token-economics-audit.md) | Token 经济学拆账与 Transformer U 型注意力上下文瘦身审计案例 |
 

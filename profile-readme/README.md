@@ -27,8 +27,8 @@
 | :--- | :--- |
 | **Role Play & AI World Simulation** | **~15,000 AI generation tests** (max **4,046 messages** in a single thread) across 6 interactive worlds & 5 model families; built decentralized NPC simulation, anti-sycophancy/anti-hostility calibration & CoT causal decision chain |
 | **Multi-Agent Orchestration** | Led zero-base V1 → V2–V4 refactor, authored **6 formal ADRs**, replaced node canvas with ordered step lists, and shipped Hybrid RAG + independent judge gating (`v4.16.1`) |
-| **AI Eval & Dynamic Simulation** | Built **500-turn offline dynamic simulator** catching **11 systemic defects** pre-launch, 201-message 3-scenario context ablation (`~133k → ~15k` prompt tokens with accurate recall), plus Clean-Room **5-Gate Doc × Source-Code QA Framework** & Gate 5 CSV validator |
-| **Deterministic Guardrails** | Shipped true-random anti-cheating gate, nested syntax auto-repair, 2-tier preference memory compression & **Builder × Read-Only Reviewer** audit SOP; led open-source secondary-dev consolidation (**5 pipelines → 1, startup modules 8 → 4, 36 green test suites**) |
+| **AI Eval & Dynamic Simulation** | Built **500-turn offline dynamic simulator** (`93.4%` empirical rank calibration) catching **11 systemic defects** pre-launch, **5,000-box gacha/card-break simulator** (`0` pity violations & `0` global `1/1` over-issues), 201-message 3-scenario context ablation (`~133k → ~15k` prompt tokens), plus Clean-Room **5-Gate Doc × Source-Code QA Framework** |
+| **Deterministic Guardrails & Skills** | Shipped true-random anti-cheating gate, nested syntax auto-repair, 2-tier preference memory compression, **7 progressive-disclosure Agent Skills**, `mcp-on-demand` 4-tier safety routing & **Builder × Read-Only Reviewer** audit SOP; led open-source secondary-dev consolidation (**5 pipelines → 1, startup modules 8 → 4, 36 green test suites**) |
 | **Systems Benchmarking & Governance** | Clean-Room abstractions for **4-stage motion-to-photon latency decomposition**, multi-architecture hardware evaluation, branch release governance & **5 root-cause engineering postmortems** |
 
 ---
