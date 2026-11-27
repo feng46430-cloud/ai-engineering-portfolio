@@ -2,7 +2,7 @@
 
 # Feng Xu (徐峰)
 
-**AI Interactive Systems & Role Play Designer · AI Eval Practitioner · 6-Year Game QA Lead**
+**AI Interactive Systems & Role Play Designer · AI Eval Practitioner · Game QA Lead (Since 2020)**
 
 *Turning stochastic LLM capabilities into controllable, verifiable interactive worlds and production workflows.*  
 *用机制设计、确定性护栏、控变量评测与严苛实机验收，把 AI 交互叙事与多 Agent 工作流从 60 分 Demo 稳定做到 95 分可用体验。*
@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/Focus-AI%20Interactive%20%26%20Role%20Play-1d4ed8?style=flat-square" alt="AI Interactive & Role Play" />
   <img src="https://img.shields.io/badge/Practice-AI%20Eval%20%26%20Simulation-0f172a?style=flat-square" alt="AI Eval & Simulation" />
   <img src="https://img.shields.io/badge/Architecture-Multi--Agent%20Workflow-334155?style=flat-square" alt="Multi-Agent" />
-  <img src="https://img.shields.io/badge/Domain-Game%20Systems%20%26%20QA%20Lead%20(6%20Yrs)-475569?style=flat-square" alt="Game Systems QA" />
+  <img src="https://img.shields.io/badge/Domain-Game%20Systems%20%26%20QA%20Lead-475569?style=flat-square" alt="Game Systems QA" />
   <img src="https://img.shields.io/badge/Base-Shanghai%20%7C%20Remote-0369a1?style=flat-square" alt="Location" />
 </p>
 
@@ -21,28 +21,31 @@
 
 ### Core Track Record（核心实证 · STAR 摘要）
 
-> *Engineering prototypes and automation scripts below are spec-led, designed, and strictly verified by me in collaboration with AI Coding tools.*
+> *Spec-First Disclosure: Engineering prototypes and automation scripts below are spec-led, designed, and strictly verified by me in collaboration with AI Coding tools. To protect original creative/prompt IP, this public portfolio focuses on architecture Specs, ADRs, generalized real Before/After evidence, and minimal runnable demos rather than copy-pasteable production prompt source. All generalized QA/governance frameworks (`02` / `04`) are clean-room abstractions using public/fictional examples only, with zero proprietary employer data or NDA-protected assets.*
 
 | Dimension | Verified Result |
 | :--- | :--- |
-| **Role Play & AI World Simulation** | **~30,000 deduplicated turns** (~15K AI replies, max **4,046 turns** in a single thread) across 6 original interactive worlds; built decentralized NPC simulation, anti-sycophancy/anti-hostility calibration & **~40% CoT token compression** without losing adherence |
-| **Multi-Agent Orchestration** | Led zero-base V1 → V2–V4 refactor (**-79% system complexity**), authored **6 formal ADRs**, replaced node canvas with ordered step lists, and shipped Hybrid RAG + independent judge gating (`v4.16.1`) |
-| **AI Eval & Anti-Hallucination QA** | Established **5-Gate Doc × Source-Code QA SOP** (surfaced **400+** spec gaps, lifted Test Gym coverage **70.0% → 98.6%**, P0 **100%**) + **500-turn dynamic simulator** catching **11 systemic defects** pre-launch |
-| **Deterministic Guardrails** | Shipped true-random anti-cheating gate, nested syntax auto-repair, 2-tier preference memory compression & **Builder × Read-Only Reviewer** audit SOP; led open-source secondary-dev consolidation (**-54% assets, 36 green test suites**) |
-| **Systems Benchmarking & QA Lead** | Designed **4-stage VR/Mocap latency decomposition** & **3-architecture × 6-device** benchmark driving 5-node hardware selection; cut smoke testing from **3×30 min → 1×5–10 min** across 3 consecutive lead/founding-QA roles |
+| **Role Play & AI World Simulation** | **~15,000 AI generation tests** (max **4,046 messages** in a single thread) across 6 interactive worlds & 5 model families; built decentralized NPC simulation, anti-sycophancy/anti-hostility calibration & CoT causal decision chain |
+| **Multi-Agent Orchestration** | Led zero-base V1 → V2–V4 refactor, authored **6 formal ADRs**, replaced node canvas with ordered step lists, and shipped Hybrid RAG + independent judge gating (`v4.16.1`) |
+| **AI Eval & Dynamic Simulation** | Built **500-turn offline dynamic simulator** catching **11 systemic defects** pre-launch, 201-message 3-scenario context ablation (`~133k → ~15k` prompt tokens with accurate recall), plus Clean-Room **5-Gate Doc × Source-Code QA Framework** & Gate 5 CSV validator |
+| **Deterministic Guardrails** | Shipped true-random anti-cheating gate, nested syntax auto-repair, 2-tier preference memory compression & **Builder × Read-Only Reviewer** audit SOP; led open-source secondary-dev consolidation (**5 pipelines → 1, startup modules 8 → 4, 36 green test suites**) |
+| **Systems Benchmarking & Governance** | Clean-Room abstractions for **4-stage motion-to-photon latency decomposition**, multi-architecture hardware evaluation, branch release governance & **5 root-cause engineering postmortems** |
 
 ---
 
 ### Featured Portfolio（精选公开作品 — 单层清爽导航，直达真实原件与脚本）
 
 #### 1. [`ai-engineering-portfolio`](https://github.com/feng46430-cloud/ai-engineering-portfolio) — *5 大 STAR 实证模块 + 真实预设原件与可运行脚本*
-- [**01 · Multi-Agent Orchestrator**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/01-multi-agent-orchestrator) — V1→V4 归零重构复盘（-79%）、6 份 ADR、废弃画布改有序列表的产品决策
-- [**02 · AI Eval & Simulation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/02-ai-eval-and-simulation) — 5-Gate 文档×源码防幻觉 SOP、商业脱敏实证与 **可运行 500 轮仿真 / CSV 门禁 Python 脚本**
+- [**01 · Multi-Agent Orchestrator**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/01-multi-agent-orchestrator) — V1→V4 归零重构复盘、6 份 ADR、三问归属法与废弃画布改有序列表的产品决策
+- [**02 · AI Eval & Simulation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/02-ai-eval-and-simulation) — 5-Gate 文档×源码防幻觉通用框架（Clean-Room）与 **可运行 500 轮仿真 / CSV 门禁 Python 脚本**
 - [**03 · Deterministic Guardrails**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/03-deterministic-guardrails) — “让模型读而非算”护栏体系、开源二次开发收敛复盘与双 Agent 复审 / 13 维红队框架
-- [**04 · Systems Benchmark & Governance**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/04-systems-benchmark-and-governance) — VR 动捕 4 段延迟拆解、6 设备横评、9 周分支发布治理与 5 大根因排障实录
-- [**05 · RP Narrative Preset & 201-Turn Fair Ablation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/05-rp-narrative-and-ablation) — 叙事预设重构核心模块（基于社区预设深度重构，仅公开本人重写部分，`55,890→12,170` 字 `-78.2%`）+ 201 条消息真实存档 `N=3` 多场景 3-Way 公平消融（均值 Prompt Token `-88.7%`、CoT 遵循 `0/3→3/3`、点名旧曲精准召回不误杀）
+- [**04 · Systems Benchmark & Governance**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/04-systems-benchmark-and-governance) — 4 段体感延迟拆解通用方法论（Clean-Room）、研发分支治理范式与 5 大根因排障实录
+- [**05 · RP Narrative Spec, Reroll Evidence & 201-Turn Ablation**](https://github.com/feng46430-cloud/ai-engineering-portfolio/tree/main/05-rp-narrative-and-ablation) — Spec 架构蓝图（不暴露可直接照抄的成品提示词源码）+ 真实存档废弃重 Roll vs 定稿对照 + 201 条消息真实存档 3 场景 3-Way 公平消融（Prompt `~13.3 万 → ~1.5 万` Token、思考指令全按规执行且点名旧曲精准召回）
 
-#### 2. [`chat-autobackup`](https://github.com/feng46430-cloud/chat-autobackup) — *源码级根因修复的独立扩展*
+#### 2. [`thinking-regex-shield`](https://github.com/feng46430-cloud/thinking-regex-shield) — *双钩子物理隔离思维链与正文渲染的独立扩展（`82/82` 全绿）*
+> 采用“留壳藏芯”占位与 `<textarea>` 内外分治还原，根治全局/角色正则误伤 `<thinking>` 内部文本及流式未闭合态 HTML 击穿问题。
+
+#### 3. [`chat-autobackup`](https://github.com/feng46430-cloud/chat-autobackup) — *源码级根因修复的独立扩展*
 > 核查宿主渲染逻辑根治隐藏楼层计数偏移 Bug，实现分卡/分会话独立计数与自动备份。
 
 ---
