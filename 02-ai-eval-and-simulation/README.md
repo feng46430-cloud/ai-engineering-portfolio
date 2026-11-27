@@ -77,7 +77,7 @@ flowchart LR
 | 类型 | 脚本 / 文档路径 | 用途与运行方式 |
 | :--- | :--- | :--- |
 | **多策略跨年动态仿真 Demo** | [`./demo-simulation/run_sim.py`](./demo-simulation/run_sim.py) | 复现“原参数冷启动死锁/过量衰减 vs. 校准后非线性模型”的 `1,860` 模拟周对比与 `57/61 (93.4%)` 校准：<br>`python 02-ai-eval-and-simulation/demo-simulation/run_sim.py` |
-| **五层卡池防摸包·期望守恒·防超发仿真** | [`./demo-simulation/run_gacha_box_sim.py`](./demo-simulation/run_gacha_box_sim.py) | 复现 5,000 盒抽卡/拆盒三态对比：朴素随机（~31% 空盒 + `1/1` 超发）vs. 尾包死保底（42% 尾包聚集摸包漏洞 + 期望通胀）vs. **整盒保底 + Fisher-Yates 防摸包洗牌 + 基础掉率补偿守恒 + 全局唯一编号耗尽锁 + `mulberry32` 种子复现**：<br>`python 02-ai-eval-and-simulation/demo-simulation/run_gacha_box_sim.py` |
+| **五层卡池防摸包·期望守恒·防超发仿真** | [`./demo-simulation/run_gacha_box_sim.py`](./demo-simulation/run_gacha_box_sim.py) | 复现 5,000 盒抽卡/拆盒三态对比：朴素随机（~32% 空盒 + `1/1` 超发）vs. 尾包死保底（~29% 尾包聚集摸包漏洞 + `+28.7%` 期望通胀）vs. **整盒保底 + Fisher-Yates 防摸包洗牌 + 基础掉率补偿守恒 + 全局唯一编号耗尽锁 + `mulberry32` 种子复现**：<br>`python 02-ai-eval-and-simulation/demo-simulation/run_gacha_box_sim.py` |
 | **Gate 5 表格门禁校验器** | [`./demo-simulation/validate_csv.py`](./demo-simulation/validate_csv.py) | 检查导出表编码、行列齐整、重复 ID、必填空值与非法乱码字符（示例数据 [`sample_testcases.csv`](./demo-simulation/sample_testcases.csv)）：<br>`python 02-ai-eval-and-simulation/demo-simulation/validate_csv.py` |
 | **上下文与 Token 审计** | [`./token-economics-audit.md`](./token-economics-audit.md) | Token 经济学拆账与 Transformer U 型注意力上下文瘦身审计案例 |
 

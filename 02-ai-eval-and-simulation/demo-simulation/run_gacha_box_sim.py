@@ -105,7 +105,8 @@ def simulate_print_run(
 
     nominal_hit_sum = sum(t.slot5_weight for t in tiers if t.is_box_hit)
     comp_p = solve_compensated_pack_hit_prob(packs_per_box, target_hits)
-    hit_scale = (comp_p / nominal_hit_sum) if mode == "guarded_shuffled_calibrated" else 1.0
+    pack_hit_prob = comp_p if mode == "guarded_shuffled_calibrated" else nominal_hit_sum
+    base_tiers: List[Tuple[TierSpec, float]] = [(t, t.slot5_weight) for t in tiers if not t.is_box_hit]
 
     minted: Dict[str, int] = {t.tier_id: 0 for t in tiers}
     zero_hit_boxes = 0
@@ -120,18 +121,19 @@ def simulate_print_run(
         box_has_hit = False
 
         for pack_idx in range(packs_per_box):
-            eligible: List[Tuple[TierSpec, float]] = []
-            for t in tiers:
-                if guarded and t.global_cap is not None and minted[t.tier_id] >= t.global_cap:
-                    continue  # Hard serial depletion lock: 0 over-issue
-                w = t.slot5_weight * hit_scale if t.is_box_hit else (1.0 - comp_p if mode == "guarded_shuffled_calibrated" else t.slot5_weight)
-                eligible.append((t, w))
-
-            if guarded and pack_idx == packs_per_box - 1 and not box_has_hit:
-                hit_pool = [(t, w) for t, w in eligible if t.is_box_hit]
-                picked = weighted_pick(rng, hit_pool if hit_pool else eligible)
+            # Two-step draw: preserve per-pack box-hit budget even after capped inserts (/1, /99, /250) deplete,
+            # reallocating hit weight proportionally among remaining uncapped hit tiers.
+            eligible_hits: List[Tuple[TierSpec, float]] = [
+                (t, t.slot5_weight)
+                for t in tiers
+                if t.is_box_hit and not (guarded and t.global_cap is not None and minted[t.tier_id] >= t.global_cap)
+            ]
+            force_pity = guarded and pack_idx == packs_per_box - 1 and not box_has_hit
+            is_hit = bool(eligible_hits) and (force_pity or rng.next_float() < pack_hit_prob)
+            if is_hit:
+                picked = weighted_pick(rng, eligible_hits)
             else:
-                picked = weighted_pick(rng, eligible)
+                picked = weighted_pick(rng, base_tiers)
 
             minted[picked.tier_id] += 1
             if picked.is_box_hit:
@@ -165,7 +167,7 @@ def simulate_print_run(
 
 def main() -> None:
     boxes = 5000
-    seed = 20261127
+    seed = 20261128
 
     naive = simulate_print_run(boxes, seed, mode="naive")
     tail_pity = simulate_print_run(boxes, seed, mode="uncalibrated_tail_pity")
