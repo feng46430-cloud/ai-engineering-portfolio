@@ -1,0 +1,30 @@
+name: Verify Deterministic Simulations & QA Gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run 1,860-week multi-strategy world & artist rank simulation
+        run: python 02-ai-eval-and-simulation/demo-simulation/run_sim.py
+
+      - name: Run 5,000-box gacha EV conservation & 1/1 cap simulation
+        run: python 02-ai-eval-and-simulation/demo-simulation/run_gacha_box_sim.py
+
+      - name: Run Gate 5 deterministic CSV validator
+        run: python 02-ai-eval-and-simulation/demo-simulation/validate_csv.py
