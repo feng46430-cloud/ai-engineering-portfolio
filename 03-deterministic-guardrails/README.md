@@ -12,7 +12,7 @@
 | **1. 随机判定与防作弊** | Prompt 让模型“随机掷 1–100”，模型按剧情氛围暗箱挑顺眼点数（总贴着惊险过关），且用户重生成可无限 SL 刷点 | 生成前由 `crypto.getRandomValues` 真随机预生成并按消息 `ownerKey` 锁定（重生成强制复用防 SL），响应后正则反向核验防模型暗改骰值并告警 |
 | **2. 隐式偏好挖掘与记忆** | 直接拿整段聊天记录总结用户偏好，AI 把“虚构角色人设台词”误当成“真用户的爱好”，且长期追加偏好撑爆上下文 | 后台评估器物理隔离「系统内容 / 角色台词 / 真实用户输入」，仅以真实输入取证写结构化黑白名单；触达双阈值自动触发两级原地凝练压缩 |
 | **3. 禁令黑名单 vs 换轴公理** | `862 字` 散乱打地鼠禁令（严禁顺从 / 严禁套路 A/B/C），越堆越触发粉红大象效应，反向把 NPC 逼成无理杠精 | 彻底删除症状黑名单，重构为 **3 条第一性公理**（世界独立 / 主体真实 / 因果守恒），先独立确定客观事实与角色立场再推演交互 |
-| **4. 开源遗留前端收敛** | 5 套割裂管线并行、全局同名 DOM ID 绑定隐藏层致设置开关点不动、未转义 `</textarea>` 击穿 DOM、跨渠道消息串台、0 自动化测试 | **5 管线合一**、启动核心模块 **`8 → 4`**、`@scope` CSS 隔离与 HTML 转义根治串台与死控件，从 0 建立 **36 套自动化测试全绿** |
+| **4. 开源遗留前端收敛** | 5 套割裂管线并行、全局同名 DOM ID 绑定隐藏层致设置开关点不动、未转义 `</textarea>` 击穿 DOM、跨渠道消息串台、0 自动化测试 | **5 管线合一**、启动核心模块 **`8 → 4`**、`@scope` CSS 隔离与 HTML 转义根治串台与死控件，跨双仓建立 **39 套自动化测试全绿（20+19）** |
 | **5. 验收环境与复审门禁** | 空壳 Mock 测试制造一堆真机根本不存在的假缺陷；单 Agent“自己写、自己测、自己宣布通过”漏放异步竞态 Bug | 确立 **「完整字节副本 + 独立端口 + 付费 API 出站拦截」** 零污染真机验收规范；引入 Builder × Read-Only Reviewer 双盲审计（95 文件起止哈希锁定，查出 9 项工程缺陷与 10 个可执行反例） |
 
 ---
@@ -45,14 +45,26 @@ const CLOSED_ONLY_RE    = /^([\s\S]+)(<\/think(?:ing)?>)/i;
 const STREAMING_OPEN_RE = /^([\s\S]{0,160}?<(think(?:ing)?)>)([\s\S]+)$/i;
 
 function beforeRegexHook(mes, ctx) {
-  if (!mes || (ctx && (ctx.isUser || ctx.isSystem || ctx.isReasoning))) return mes;
+  if (typeof mes !== 'string' || !mes || (ctx && (ctx.isUser || ctx.isSystem || ctx.isReasoning))) return mes;
   if (stash.size > 32) stash.clear(); // 防下游异常中断管线造成 Map 泄漏的保险丝
 
-  const m = CLOSED_PAIR_RE.exec(mes) || STREAMING_OPEN_RE.exec(mes);
-  if (!m) return mes;
-  const id = String(++seq);
-  stash.set(id, m[3]); // 仅暂存思维链内体，外层 <thinking></thinking> 原样保留
-  return m[1] + `THSHIELDTOKEN${id}END` + (m[4] || '') + mes.slice(m[0].length);
+  let m = CLOSED_PAIR_RE.exec(mes);
+  if (m && m[3]) {
+    const id = String(++seq);
+    stash.set(id, m[3]); // 仅暂存思维链内体，外层 <thinking></thinking> 原样保留
+    return m[1] + `THSHIELDTOKEN${id}END` + m[4] + mes.slice(m[0].length);
+  }
+  if ((m = CLOSED_ONLY_RE.exec(mes))) { // 兼容 Prefill 缺开标签态
+    const id = String(++seq);
+    stash.set(id, m[1]);
+    return `THSHIELDTOKEN${id}END` + m[2] + mes.slice(m[0].length);
+  }
+  if ((m = STREAMING_OPEN_RE.exec(mes))) { // 兼容流式吐字未闭合态
+    const id = String(++seq);
+    stash.set(id, m[3]);
+    return m[1] + `THSHIELDTOKEN${id}END`;
+  }
+  return mes;
 }
 
 // 2) AFTER_MARKDOWN (LATEST, before DOMPurify)：按 <textarea> 内外分治安全还原
@@ -92,7 +104,7 @@ function afterMarkdownHook(mes) {
 
 ### R · Result（可验证结果）
 - **体验与架构收敛**：5 套割裂管线合一，启动核心模块由 **`8 → 4`**，彻底解决多渠道串台与死控件问题；
-- **质量门禁闭环**：累计交付 **36 套自动化测试全绿**（覆盖滤网解析、防串台、提示词校验、主动流程及浏览器端到端验证），迭代回归可快速验真；同时纠偏“空壳 Mock 制造假缺陷”反模式，确立 **「完整字节副本 + 独立端口 + 付费 API 出站拦截守卫」** 零污染真机验收规范，并完成 95 文件起止哈希锁定的工程 × UX 双盲审计。
+- **质量门禁闭环**：跨两个大型扩展仓库累计交付 **39 套自动化回归测试全绿（20 + 19 套）**（覆盖异步懒加载开关点击竞态 `dataset.userTouched`、高频渲染合并防抖、跨 4 平台私信管线防串台、楼层账本集成、定时器销毁防内存泄漏、提示词契约及端到端验证），并建立与上游仓库的定期无损同步合并规范；同时纠偏“空壳 Mock 制造假缺陷”反模式，确立 **「完整字节副本 + 独立端口 + 付费 API 出站拦截守卫」** 零污染真机验收规范，完成 95 文件起止哈希锁定的工程 × UX 双盲审计。
 
 ---
 
@@ -106,4 +118,4 @@ function afterMarkdownHook(mes) {
 
 ---
 
-> 💡 **注（7:3 知识产权与面试演示声明）**：为保护原创工具与规则资产免受自动化爬虫滥用，本仓库公开核心架构原理、代表性高亮代码切片与验收门禁规范；完整的确定性护栏扩展套件（含真随机防篡改、异步偏好压缩、词法修复与 36 套回归用例）支持于业务面试中**现场屏幕共享实机演示与任意极端 Case 当场压测**。
+> 💡 **注（7:3 知识产权与面试演示声明）**：为保护原创工具与规则资产免受自动化爬虫滥用，本仓库公开核心架构原理、代表性高亮代码切片与验收门禁规范；完整的确定性护栏扩展套件（含真随机防篡改、异步偏好压缩、词法修复与 39 套回归用例）支持于业务面试中**现场屏幕共享实机演示与任意极端 Case 当场压测**。
