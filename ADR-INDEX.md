@@ -33,7 +33,7 @@
 
 | 编号 | 决策主题 | 核心取舍与实证 | 出处项目原文 | 关联踩坑 |
 | :--- | :--- | :--- | :--- | :--- |
-| **SL-ADR-02** | 4 端口 GPU 同驻 → 单 `Qwen3-8B` 按需分层 | RX 7900 GRE 实测 `Qwen3-8B` 比 `Qwen3.5-4B` 快 **4.7 倍**；切 `-Profile lean` 单主脑后显存 `9.30 → 5.22 GiB`，前台 `P50=825.5ms`，3 日整局折算 **`¥0.0055/局`** | [`starlight / ARCHITECTURE-BLUEPRINT`（ADR-02）](https://github.com/feng46430-cloud/starlight-market-ai-npc-blueprint/blob/main/docs/ARCHITECTURE-BLUEPRINT.md) | — |
+| **SL-ADR-02** | 4 端口 GPU 同驻 → 单 `Qwen3-8B` 按需分层 | RX 7900 GRE 实测 `Qwen3-8B` 比 `Qwen3.5-4B` 快 **4.7 倍**；切 `-Profile lean` 单主脑后显存 `9.30 → 5.22 GiB`，前台 `P50=825.5ms`，3 交易日/约 3 分钟短局折算 **`¥0.0055/局`**（长线算力成本仍需后续压测测算） | [`starlight / ARCHITECTURE-BLUEPRINT`（ADR-02）](https://github.com/feng46430-cloud/starlight-market-ai-npc-blueprint/blob/main/docs/ARCHITECTURE-BLUEPRINT.md) | — |
 | **SL-ADR-03** | **负向选型**：放弃复用检索精排做安全拦截 | `N=10` 实机探针中 `bge-reranker-v2-m3` 对股市黑话“死叉/梭哈”距误杀线仅差 `0.0356` logit，遂放弃复用，线上改用专用安全分类器 | [`starlight / ARCHITECTURE-BLUEPRINT`（ADR-03）](https://github.com/feng46430-cloud/starlight-market-ai-npc-blueprint/blob/main/docs/ARCHITECTURE-BLUEPRINT.md) | [Note 03](https://github.com/feng46430-cloud/ai-field-notes/blob/main/notes/03-anti-sycophancy-and-search-before-build.md) |
 | **MA-ADR-004** | 静动分层 Prefix Cache 与无偏差 U 型注意力 | 静态规则前移 + 动态状态贴尾 + 固定字典键序保护 KV Cache 与 Thinking Signature；剥离 `data.tools` 单独统计防挤偏注意力区间 | [`01 / adr-highlights`（ADR-004）](./01-multi-agent-orchestrator/adr-highlights.md) | [Note 10](https://github.com/feng46430-cloud/ai-field-notes/blob/main/notes/10-multi-agent-writing-four-antipatterns.md) |
 
