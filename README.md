@@ -16,6 +16,7 @@
 - **AI 评测（Eval）与概率仿真**：看 [**AI 评测校准与止损记录**](./03-deterministic-guardrails/human-vs-ai-sparring-playbook.md)（修正 `98%` 虚高通过率、拆开“注入率 ≠ 表达率”）和 [**02 · 评测、5-Gate 与概率仿真**](./02-ai-eval-and-simulation/)（5,000 盒抽卡防摸包与期望守恒脚本）。
 - **AI 玩法与智能 NPC 原型**：看 [**《星海交易局》3D AI-NPC 玩法原型**](https://github.com/feng46430-cloud/starlight-market-ai-npc-blueprint)（3 分钟股市盲测博弈、3 行容器壳自由涌现、单局 `¥0.0055` ROI 与规则隔离）和 [**01 · 多 Agent 编排工作台演变**](./01-multi-agent-orchestrator/)。
 - **游戏 QA、延迟拆解与底层排障**：看 [**04 · 4 段延迟拆解与根因排障**](./04-systems-benchmark-and-governance/)（TCP/UDP 抓包、Profiler A/B 对照、Windows 原子写并发与跨平台哈希排查）和 [**02 · 5-Gate 文档×源码核验流程**](./02-ai-eval-and-simulation/)。
+- **跨项目架构决策总览（18 条 ADR）**：看 [**ADR-INDEX.md（按 5 大工程主题索引）**](./ADR-INDEX.md)（集中串起全部 3 个公开仓的关键取舍、负向选型与对应踩坑笔记）。
 
 ---
 
