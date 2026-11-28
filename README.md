@@ -72,7 +72,7 @@ python 02-ai-eval-and-simulation/demo-simulation/run_gacha_box_sim.py
 # 2) 长周期数值曲线校准与单维阈值重叠反例脚本
 python 02-ai-eval-and-simulation/demo-simulation/run_sim.py
 
-# 3) 01 模块内存态校验演示单测（人工原话审批 + 写入前旧值防覆盖校验 HITL CAS，14/14）
+# 3) 01 模块内存态校验与 64 并发 CAS 压测（人工原话审批 + 64 并发 × 10 轮抢写零脏写，15/15）
 node --test 01-multi-agent-orchestrator/mve/mve.test.mjs
 
 # 4) 核验《星海交易局》脱敏诊断 JSON（75% 权重重算 + 分档审计）

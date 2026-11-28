@@ -198,6 +198,81 @@ test('readVerdict: ignores PASS/FAIL words appearing after the first 5 non-empty
   assert.equal(readVerdict(longRationale), undefined);
 });
 
+// ============================================================================
+// Suite 3: High-Concurrency CAS Write-Conflict Stress (concurrency = 64 x 10)
+// ============================================================================
+
+test('HITL CAS Stress: 64 concurrent writers x 10 rounds -> strictly 1 winner / 63 CAS_CONFLICT per round, 0 dirty writes', async () => {
+  const CONCURRENCY = 64;
+  const ROUNDS = 10;
+  const store = createHitlProposalStore({ 1: { 'npc.affinity': 0, 'npc.lastGift': 'none' } });
+
+  let totalWins = 0;
+  let totalConflicts = 0;
+
+  for (let r = 0; r < ROUNDS; r++) {
+    const baseAffinity = store.getCommittedState(1)['npc.affinity'];
+    assert.equal(baseAffinity, r);
+
+    // Stage 64 concurrent proposals capturing the exact same pre-write snapshot
+    const stagedIds = [];
+    for (let w = 0; w < CONCURRENCY; w++) {
+      const staged = store.proposeChanges({
+        floor: 1,
+        changes: [
+          {
+            path: 'npc.affinity',
+            newValue: baseAffinity + 1,
+            evidence: { quote: `第${r + 1}轮玩家${w}向角色赠送咖啡触发好感变化`, floor: 1 },
+          },
+          {
+            path: 'npc.lastGift',
+            newValue: `round-${r}-writer-${w}`,
+            evidence: { quote: `第${r + 1}轮玩家${w}向角色赠送咖啡触发好感变化`, floor: 1 },
+          },
+        ],
+      });
+      assert.equal(staged.ok, true);
+      stagedIds.push({ id: staged.id, writer: w });
+    }
+
+    // Fire all 64 approvals concurrently via Promise.all
+    const outcomes = await Promise.all(
+      stagedIds.map(async ({ id, writer }) => {
+        await Promise.resolve();
+        const res = store.applyProposal({ id, humanQuote: `并发审批-R${r}-W${writer}` });
+        return { writer, res };
+      }),
+    );
+
+    const winners = outcomes.filter((o) => o.res.ok);
+    const conflicts = outcomes.filter((o) => !o.res.ok && o.res.code === 'CAS_CONFLICT');
+    const unexpected = outcomes.filter((o) => !o.res.ok && o.res.code !== 'CAS_CONFLICT');
+
+    assert.equal(winners.length, 1, `Round ${r}: expected strictly 1 winner`);
+    assert.equal(conflicts.length, CONCURRENCY - 1, `Round ${r}: expected 63 CAS_CONFLICT`);
+    assert.equal(unexpected.length, 0);
+
+    totalWins += winners.length;
+    totalConflicts += conflicts.length;
+
+    // Verify atomic multi-field consistency (lastGift matches the single winning writer)
+    const committed = store.getCommittedState(1);
+    assert.equal(committed['npc.affinity'], r + 1);
+    assert.equal(committed['npc.lastGift'], `round-${r}-writer-${winners[0].writer}`);
+
+    // Clean up rejected stale proposals from pending queue
+    for (const c of conflicts) {
+      const target = stagedIds.find((s) => s.writer === c.writer);
+      store.rejectProposal({ id: target.id });
+    }
+  }
+
+  assert.equal(totalWins, ROUNDS);
+  assert.equal(totalConflicts, ROUNDS * (CONCURRENCY - 1));
+  assert.equal(store.getChangeLog().length, ROUNDS * 2);
+});
+
 test('stripMeta: strips internal settlement/thinking blocks while preserving clean prose', () => {
   const raw = [
     '<Analysis>内部草稿推理</Analysis>',
