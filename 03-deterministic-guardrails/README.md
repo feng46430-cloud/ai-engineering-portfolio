@@ -6,8 +6,8 @@
 
 ## 核心实操文档
 
-- **[AI 评测打假、产品止损与防静默劣化实录](./human-vs-ai-sparring-playbook.md)**：拆穿 `98%+` 假全绿评测、发现“注入率 ≠ 表达率”、废弃已做完画布与 2D 首屏、以及防调优静默劣化的行为变更校验思路。
-- **[双 Agent 独立只读复审工作流](./dual-agent-review-sop.md)**：禁止“自写自测”的 Builder × Read-Only Reviewer 实践（在 4 轮复审中实机拦截 `calendar-view.js` 异步开关覆盖竞态 Bug）与零成本前置门禁分级。
+- **[AI 评测校准、产品止损与防静默劣化记录](./human-vs-ai-sparring-playbook.md)**：修正 `98%+` 虚高通过率、拆分“注入率 ≠ 表达率”、废弃已做完画布与拥挤 2D 首屏、以及防调优静默劣化的行为变更校验思路。
+- **[双 Agent 独立只读复审工作流](./dual-agent-review-sop.md)**：避免“自写自测”的 Builder × Read-Only Reviewer 实践（在 4 轮复审中实机拦下异步懒加载覆写开关点击态的竞态 Bug）与零成本前置门禁分级。
 
 ---
 
