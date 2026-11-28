@@ -1,0 +1,105 @@
+{
+  "runAt": "2026-11-26T05:07:18.000Z",
+  "protocol": "strict-fair-controlled-ab + 3-way-real-card-ablation",
+  "modelLabel": "Gemini 4 (Live API · 严格公平基线)",
+  "note": "Only 100% real 201-message long-running card 3-Way ablation data is retained; synthetic lightweight micro-experiments (exp2/exp3) have been removed in favor of real playthrough reroll Before/After evidence in README.md.",
+  "realCardAblation": {
+    "sampleCount": 3,
+    "sourceNote": "基于本人原创 201 楼真实长程互动存档（内置 28 条生态世界书 + 56 条曲目世界书 + 14,004 字结构化状态表 + 11 条可见楼层）在 3 类不同场景下进行脱敏 3-Way 公平消融（S1 商务宣发 / S2 深夜情绪独处 / S3 点名旧曲精准召回边界），零丑化对照组、零泄露私人剧情正文。",
+    "averages": {
+      "groupA_promptTokens": 132843,
+      "groupB_promptTokens": 133033,
+      "groupC_promptTokens": 14972,
+      "groupA_totalTokens": 134173,
+      "groupB_totalTokens": 134481,
+      "groupC_totalTokens": 16041,
+      "promptReductionPct": 88.7,
+      "totalReductionPct": 88,
+      "groupB_cotAdherenceRate": "0/3 (0%)",
+      "groupC_cotAdherenceRate": "3/3 (100%)",
+      "s3TruePositiveRecall": "命中并成功用于正文（同时继续拦截其余 29 条无关误触/递归）"
+    },
+    "scenarios": [
+      {
+        "id": "S1",
+        "label": "商务宣发与档期会议（无旧歌提及）",
+        "groupA": {
+          "wbCount": 41,
+          "promptTokens": 132851,
+          "totalTokens": 135139,
+          "htmlLeak": true
+        },
+        "groupB": {
+          "wbCount": 41,
+          "promptTokens": 133060,
+          "totalTokens": 134750,
+          "cotObeyed": false,
+          "cotChars": 0
+        },
+        "groupC": {
+          "wbCount": 10,
+          "promptTokens": 14469,
+          "totalTokens": 15643,
+          "cotObeyed": true,
+          "cotChars": 52,
+          "recallVerified": "n/a"
+        }
+      },
+      {
+        "id": "S2",
+        "label": "深夜情绪卸压独处（纯情绪、零业务词）",
+        "groupA": {
+          "wbCount": 41,
+          "promptTokens": 132834,
+          "totalTokens": 133622,
+          "htmlLeak": false
+        },
+        "groupB": {
+          "wbCount": 41,
+          "promptTokens": 133015,
+          "totalTokens": 134069,
+          "cotObeyed": false,
+          "cotChars": 0
+        },
+        "groupC": {
+          "wbCount": 10,
+          "promptTokens": 14453,
+          "totalTokens": 15341,
+          "cotObeyed": true,
+          "cotChars": 62,
+          "recallVerified": "n/a"
+        }
+      },
+      {
+        "id": "S3",
+        "label": "主动点名某首旧曲（验证按需召回不误杀）",
+        "groupA": {
+          "wbCount": 41,
+          "promptTokens": 132843,
+          "totalTokens": 133759,
+          "htmlLeak": false
+        },
+        "groupB": {
+          "wbCount": 41,
+          "promptTokens": 133024,
+          "totalTokens": 134624,
+          "cotObeyed": false,
+          "cotChars": 0
+        },
+        "groupC": {
+          "wbCount": 12,
+          "promptTokens": 15993,
+          "totalTokens": 17139,
+          "cotObeyed": true,
+          "cotChars": 78,
+          "recallVerified": "PASS (精准放行点名曲目并用于正文，其余 29 条误触继续拦截)"
+        }
+      }
+    ],
+    "honestCaveats": [
+      "颗粒度取舍：未提及的 17 条曲目大条目按设计折叠，日常不白烧数万字；S3 实测已证明当玩家主动点名旧曲时，护目镜精准放行该条且模型正文正常调用，未出现过度误杀。",
+      "延迟诚实声明：第三方中转节点并发请求存在队列抖动且未透传 reasoning_effort，故本报告不拿单次中转耗时宣称“提速”，仅认实测 Token、误触数、召回精度与指令遵循率。",
+      "规则配合：极简短 CoT 需与体验收尾约束（如结尾无问号）配合使用，S2/S3 加入陈述句收尾约束后结尾表现更稳。"
+    ]
+  }
+}

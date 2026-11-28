@@ -1,0 +1,65 @@
+name: Verify Deterministic Simulations & QA Gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run 1,820-step multi-strategy curve calibration & overlap demo
+        run: python 02-ai-eval-and-simulation/demo-simulation/run_sim.py
+
+      - name: Run 5,000-box gacha EV conservation & 1/1 cap simulation
+        run: python 02-ai-eval-and-simulation/demo-simulation/run_gacha_box_sim.py
+
+      - name: Run Gate 5 deterministic CSV validator
+        run: python 02-ai-eval-and-simulation/demo-simulation/validate_csv.py
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run 01 Multi-Agent MVE unit tests (HITL CAS & tolerant splitter)
+        run: node --test 01-multi-agent-orchestrator/mve/mve.test.mjs
+
+      - name: Verify relative Markdown links & generic secret/path hygiene
+        run: |
+          python - << 'EOF'
+          import pathlib, re
+          root = pathlib.Path('.')
+          link_re = re.compile(r'!?\[[^\]]*\]\(([^)#]+)(#[^)]+)?\)')
+          secret_re = re.compile(r'(?:sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{20,}|AIza[0-9A-Za-z\-_]{20,}|[A-Za-z]:\\Users\\)', re.I)
+          errs = []
+          for f in root.rglob('*'):
+              if not f.is_file() or '.git' in f.parts:
+                  continue
+              rel = f.relative_to(root).as_posix()
+              if f.suffix.lower() == '.md':
+                  txt = f.read_text(encoding='utf-8', errors='ignore')
+                  for m in link_re.finditer(txt):
+                      t = m.group(1).strip()
+                      if not t.startswith(('http://', 'https://', 'mailto:')) and not (f.parent / t).resolve().exists():
+                          errs.append(f'BROKEN_LINK:{rel}->{t}')
+              if f.suffix.lower() in {'.md', '.txt', '.json', '.py', '.mjs'}:
+                  hits = secret_re.findall(f.read_text(encoding='utf-8', errors='ignore'))
+                  if hits:
+                      errs.append(f'SECRET_OR_PATH:{rel}:{set(hits)}')
+          if errs:
+              raise SystemExit(f'PORTFOLIO_HYGIENE_FAILED: {errs}')
+          print('PORTFOLIO_LINKS_AND_HYGIENE_PASSED')
+          EOF
